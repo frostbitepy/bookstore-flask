@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}New Book{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="title">Title</label>
+    <input name="title" id="title" value="{{ request.form['title'] }}" required>
+
+    <label for="isbn">ISBN</label>
+    <input name="isbn" id="isbn" value="{{ request.form['isbn'] }}" required>
+
+    <label for="publication_year">Publication Year</label>
+    <input name="publication_year" id="publication_year" value="{{ request.form['publication_year'] }}" required>
+
+    <label for="author_id">Author</label>
+    <select name="author_id" id="author_id" required>
+      {% for author in authors %}
+        <option value="{{ author['author_id'] }}">{{ author['author_name'] }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="genre_id">Genre</label>
+    <select name="genre_id" id="genre_id" required>
+      {% for genre in genres %}
+        <option value="{{ genre['genre_id'] }}">{{ genre['genre_name'] }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="publisher_id">Publisher</label>
+    <select name="publisher_id" id="publisher_id" required>
+      {% for publisher in publishers %}
+        <option value="{{ publisher['publisher_id'] }}">{{ publisher['publisher_name'] }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="price">Price</label>
+    <input name="price" id="price" value="{{ request.form['price'] }}" required>
+
+    <label for="stock_quantity">Stock Quantity</label>
+    <input name="stock_quantity" id="stock_quantity" value="{{ request.form['stock_quantity'] }}" required>
+
+    <input type="submit" value="Save">
+  </form>
+{% endblock %}
